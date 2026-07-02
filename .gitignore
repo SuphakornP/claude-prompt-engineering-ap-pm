@@ -1,0 +1,47 @@
+# macOS
+.DS_Store
+.AppleDouble
+
+# Windows
+Thumbs.db
+
+# Editor and local workspace files
+.idea/
+.vscode/
+.history/
+*.swp
+*.swo
+
+# Dependencies and package-manager caches
+node_modules/
+.npm/
+.pnpm-store/
+
+# Build and generated output
+dist/
+build/
+out/
+coverage/
+.cache/
+.parcel-cache/
+.vite/
+.turbo/
+*.tsbuildinfo
+
+# Local dev and test artifacts
+.playwright-cli/
+playwright-report/
+test-results/
+output/
+*.log
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.local
+
+# Temporary files
+tmp/
+temp/
+*.tmp

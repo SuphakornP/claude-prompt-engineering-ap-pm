@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Claude Prompt Engineering for AP Project Managers</title>
+    <meta
+      name="description"
+      content="HTML presentation for AP Thailand Project Managers on Claude prompt engineering, model selection, Claude Chat, Claude Cowork, and Claude Code."
+    />
+    <link rel="preload" as="image" href="assets/hero-coworker.png" />
+    <link rel="preload" as="image" href="assets/logo-apthai-white.png" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23e1282e'/%3E%3Cpath d='M18 46 32 14l14 32h-7l-3-8H28l-3 8h-7Zm13-15h3l-1.5-4.2L31 31Z' fill='%23fff7ed'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="styles.css?v=7" />
+  </head>
+  <body>
+    <div class="progress-shell" aria-hidden="true">
+      <div class="progress-bar"></div>
+    </div>
+
+    <header class="deck-top" aria-label="Presentation navigation">
+      <a class="brand-mark" href="#slide-1" aria-label="ไปสไลด์แรก">
+        <img src="assets/logo-apthai-white.png" alt="AP Thailand" />
+        <span>PM AI Enablement</span>
+      </a>
+      <nav class="dot-nav" aria-label="Slide navigation"></nav>
+      <div class="top-actions">
+        <a class="text-button" href="sources.md">แหล่งอ้างอิง</a>
+        <button class="text-button notes-toggle" type="button" aria-expanded="false">โน้ต</button>
+        <button class="icon-button fullscreen-button" type="button" aria-label="เปิดหรือปิดเต็มจอ">
+          <span aria-hidden="true">⛶</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="deck">
+      <section class="slide hero-slide" id="slide-1" data-title="เปิดเรื่อง">
+        <div class="hero-media" aria-hidden="true"></div>
+        <div class="slide-inner hero-inner">
+          <p class="kicker">คลาสสำหรับ Project Manager ของ AP Thailand</p>
+          <h1>Claude Prompt Engineering สำหรับ PM</h1>
+          <p class="hero-copy">
+            จากการถาม AI ทีละข้อ ไปสู่การมอบหมายงานที่มีบริบท แหล่งข้อมูล เกณฑ์ตัดสินใจ และผลลัพธ์ที่ PM ใช้ต่อได้จริง
+          </p>
+          <div class="hero-contrast" aria-label="Core shift">
+            <span>Prompt สั้น</span>
+            <strong>Brief ที่ใช้งานได้</strong>
+          </div>
+        </div>
+        <aside class="speaker-note">
+          เปิดด้วยการบอกว่า session นี้ไม่ใช่คลาสจำสูตร prompt แต่เป็นการยกระดับวิธี brief งานให้ AI เหมือน brief เพื่อนร่วมทีมคนหนึ่ง
+          เป้าหมายคือให้ PM ใช้ Claude ได้กับงานจริง เช่น สรุปรายงาน ตีความ requirement เทียบ vendor proposal ทำ decision memo และทำ prototype เบื้องต้น
+        </aside>
+      </section>
+
+      <section class="slide agenda-slide" id="slide-2" data-title="Agenda">
+        <div class="slide-inner agenda-layout">
+          <div class="statement">
+            <p class="kicker">Agenda</p>
+            <h2>วันนี้มี 3 เรื่องหลัก</h2>
+            <p>รู้ว่าใช้ Claude แบบไหน เลือกโมเดลอะไร และเขียน prompt ให้ชัด</p>
+          </div>
+          <div class="agenda-list" aria-label="Session agenda">
+            <article>
+              <span>01</span>
+              <div>
+                <h3>เลือกประเภท Claude</h3>
+                <p>Chat, Cowork หรือ Code</p>
+              </div>
+            </article>
+            <article>
+              <span>02</span>
+              <div>
+                <h3>เลือก Model</h3>
+                <p>เร็ว คุ้ม หรือคิดลึก</p>
+              </div>
+            </article>
+            <article>
+              <span>03</span>
+              <div>
+                <h3>Prompt ที่ดี</h3>
+                <p>brief ชัด มีบริบท และมีตัวอย่าง</p>
+              </div>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-note">
+          ใช้หน้านี้บอกภาพรวมแบบเร็ว ๆ ว่าวันนี้มี 3 เรื่องหลัก: การเลือกประเภทของ Claude, การเลือก Model, และการเขียน Prompt ที่ดี
+          ไม่ต้องอธิบายยาว เพราะแต่ละเรื่องจะมีสไลด์ของตัวเองในช่วงถัดไป
+        </aside>
+      </section>
+
+      <section class="slide quote-slide" id="slide-3" data-title="Prompt คือ Brief">
+        <div class="slide-inner quote-layout">
+          <p class="kicker">แนวคิดหลักจาก Piyalitt Ittichaiwong</p>
+          <blockquote>
+            “ลองเอา prompt ของคุณไปให้เพื่อนร่วมงานที่แทบไม่รู้บริบทของงานอ่าน แล้วขอให้เขาทำตาม ถ้าเขายังงง Claude ก็จะงงเหมือนกัน”
+          </blockquote>
+          <div class="quote-takeaway">
+            <span>คำถามที่ดีกว่า</span>
+            <strong>ถ้าคนใหม่มาอ่าน เขาจะรู้ไหมว่าเราต้องการอะไร?</strong>
+          </div>
+        </div>
+        <aside class="speaker-note">
+          ใช้ quote นี้เป็นแกนของทั้ง deck เพราะ prompt engineering สำหรับ PM ไม่ใช่เทคนิคไอที แต่คือ discipline ของการ brief งานให้ชัด
+          ชวนผู้ฟังคิดถึงเวลาส่งงานให้ทีม vendor หรือทีม internal ถ้า brief ไม่ชัด งานจะออกนอกทาง AI ก็เหมือนกัน
+        </aside>
+      </section>
+
+      <section class="slide problem-slide" id="slide-4" data-title="งานจริงของ PM">
+        <div class="slide-inner two-column">
+          <div class="statement">
+            <p class="kicker">งานจริงของ PM</p>
+            <h2>PM ไม่ได้มีคำถามเดียว งานจริงคือการประกอบร่างหลายบริบทพร้อมกัน</h2>
+            <p>
+              ในหนึ่ง project มี timeline, budget, design change, risk, vendor response, site issue, owner expectation และ decision log ที่ต้องเชื่อมกันก่อนตัดสินใจ
+            </p>
+          </div>
+          <div class="context-wall" aria-label="Project manager context items">
+            <span>Minutes</span>
+            <span>BOQ</span>
+            <span>RFI</span>
+            <span>Spec</span>
+            <span>Risk</span>
+            <span>Vendor</span>
+            <span>Timeline</span>
+            <span>Issue log</span>
+            <span>Decision</span>
+          </div>
+        </div>
+        <aside class="speaker-note">
+          ย้ำว่า PM เหนื่อยกับการ synthesize ข้อมูลมากกว่าการเขียนประโยคสวย ๆ Claude มีประโยชน์เมื่อมันช่วยลดภาระการอ่าน รวม และจัดรูปแบบข้อมูล
+          จุดสำคัญคือผลลัพธ์ต้องช่วยให้ตัดสินใจหรือคุยกับ stakeholder ได้ ไม่ใช่แค่ข้อความที่ดูดี
+        </aside>
+      </section>
+
+      <section class="slide system-slide" id="slide-5" data-title="ประเภทการใช้งาน">
+        <div class="slide-inner">
+          <p class="kicker">ประเภทการใช้งาน Claude</p>
+          <h2>เลือกประเภทให้ตรงงาน ก่อนเขียน prompt</h2>
+          <div class="surface-grid">
+            <article>
+              <span class="surface-number">01</span>
+              <h3>Chat: เพื่อนคู่คิด</h3>
+              <p>คุย ถามต่อ สรุปไฟล์ วิเคราะห์ข้อมูล เขียนข้อความ และปรับคำไปทีละรอบ</p>
+              <strong>ใช้เมื่อ PM ยังอยากคุมคำตอบทุกจังหวะ</strong>
+            </article>
+            <article>
+              <span class="surface-number">02</span>
+              <h3>Cowork: ผู้ช่วยจัดงาน</h3>
+              <p>ให้ Claude ทำงานกับไฟล์ โฟลเดอร์ หรือแอปบนเครื่อง แล้วส่งผลลัพธ์ให้ตรวจ</p>
+              <strong>ใช้เมื่องานยาว งานซ้ำ หรือมีหลายไฟล์</strong>
+            </article>
+            <article>
+              <span class="surface-number">03</span>
+              <h3>Code: ของทดลองใช้</h3>
+              <p>สร้าง prototype, tracker, dashboard หรือ automation เล็ก ๆ จากคำอธิบายของเรา</p>
+              <strong>ใช้เมื่อต้องได้ไฟล์หรือเครื่องมือที่ลองเปิดได้</strong>
+            </article>
+          </div>
+          <p class="source-line">
+            อ้างอิง official: <a href="https://www.anthropic.com/product/claude-cowork">Claude Cowork</a>, <a href="https://code.claude.com/docs/en/overview">Claude Code</a>, <a href="https://support.claude.com/en/articles/9517075-what-are-projects">Projects</a>
+          </p>
+        </div>
+        <aside class="speaker-note">
+          ก่อนจะสอนว่า prompt ยังไง ให้ทีมเห็นว่า Claude มีหลายประเภทการใช้งาน ไม่ใช่มีแค่หน้า chat
+          Chat เหมาะกับการคิดร่วมกัน Cowork เหมาะกับ delegation ผ่านไฟล์และแอป ส่วน Code เหมาะกับการ build สิ่งที่มี logic หรือไฟล์จริง
+        </aside>
+      </section>
+
+      <section class="slide model-slide" id="slide-6" data-title="เลือกโมเดล">
+        <div class="slide-inner">
+          <p class="kicker">เลือกโมเดล</p>
+          <h2>เลือกโมเดลตามงาน: เร็ว ประหยัด หรือคิดลึก</h2>
+          <div class="model-band">
+            <article>
+              <small>งานยากที่สุด</small>
+              <h3>Fable 5</h3>
+              <p>งาน agent ยาว ซับซ้อน ต้องคิดหลายชั้น หรือมีความเสี่ยงสูงต่อคุณภาพ</p>
+            </article>
+            <article>
+              <small>วิเคราะห์ซับซ้อน</small>
+              <h3>Opus 4.8</h3>
+              <p>งานวิเคราะห์ละเอียด งานหลายขั้นที่ต้องการความแม่นยำสูง และงานที่คุณภาพสำคัญกว่าความเร็ว</p>
+            </article>
+            <article class="featured-model">
+              <small>ตัวหลักประจำวัน</small>
+              <h3>Sonnet 5</h3>
+              <p>จุดเริ่มต้นสำหรับ PM ส่วนใหญ่: เร็ว ฉลาด ใช้ได้กับสรุป วิเคราะห์ เขียน และงานหลายขั้นระดับกลาง</p>
+            </article>
+            <article>
+              <small>เร็วและคุ้ม</small>
+              <h3>Haiku 4.5</h3>
+              <p>งานจำนวนมาก ตรงไปตรงมา ต้องการความเร็ว เช่น ดึงข้อมูล จัดหมวดหมู่ หรือร่างข้อความสั้น ๆ</p>
+            </article>
+          </div>
+          <div class="model-footnote">
+            <strong>Mythos 5:</strong> มีในเอกสารทางการ แต่เปิดใช้แบบจำกัดผ่าน Project Glasswing ไม่ใช่โมเดลหลักสำหรับผู้ใช้ทั่วไป
+          </div>
+          <p class="source-line">
+            อ้างอิง official: <a href="https://platform.claude.com/docs/en/about-claude/models/overview">Anthropic Models overview</a>
+          </p>
+        </div>
+        <aside class="speaker-note">
+          อธิบายแบบภาษาคนทำงาน: Sonnet 5 เป็นตัวหลักที่ควรเริ่มกับงาน PM ส่วนใหญ่ ถ้างานง่ายและปริมาณเยอะค่อยคิดถึง Haiku ถ้างานต้องใช้การคิดลึกมากค่อยไป Opus หรือ Fable
+          ชี้ให้ชัดว่า Mythos 5 มีจริงตาม official docs แต่ไม่ควรใส่ในคู่มือใช้งานทั่วไปของทีม เพราะ availability จำกัด
+        </aside>
+      </section>
+
+      <section class="slide anatomy-slide" id="slide-7" data-title="โครงสร้าง Prompt">
+        <div class="slide-inner">
+          <p class="kicker">โครงสร้าง Prompt</p>
+          <h2>Prompt ที่ดีสำหรับ PM มี 6 ส่วน ไม่ใช่แค่คำสั่งเดียว</h2>
+          <div class="anatomy-grid">
+            <span>บทบาท</span>
+            <span>เป้าหมาย</span>
+            <span>บริบท</span>
+            <span>ข้อมูลอ้างอิง</span>
+            <span>รูปแบบคำตอบ</span>
+            <span>เกณฑ์ตรวจ</span>
+          </div>
+          <pre class="prompt-sample"><code>&lt;role&gt;คุณคือ PM advisor ของ AP Thailand&lt;/role&gt;
+&lt;goal&gt;สรุป issue log เป็น decision memo สำหรับประชุมผู้บริหาร&lt;/goal&gt;
+&lt;context&gt;โครงการคอนโด high-rise, delay เกิดจาก vendor drawing&lt;/context&gt;
+&lt;sources&gt;แนบ minutes, issue log, timeline, vendor reply&lt;/sources&gt;
+&lt;format&gt;ทำเป็น memo 1 หน้า: สถานการณ์, ทางเลือก, ความเสี่ยง, คำแนะนำ&lt;/format&gt;
+&lt;check&gt;ก่อนตอบ ให้ตรวจว่าคำแนะนำอ้างอิงแหล่งข้อมูลไหนบ้าง&lt;/check&gt;</code></pre>
+          <p class="source-line">
+            อ้างอิง official: <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">Prompting best practices</a>
+          </p>
+        </div>
+        <aside class="speaker-note">
+          บอกทีมว่า XML tags ไม่ได้มีไว้ให้ดูยาก แต่มีไว้แยกชิ้นส่วนของ brief ให้ Claude อ่านไม่ปนกัน
+          ให้เทียบกับ email brief ที่มีหัวข้อชัดเจน ถ้าคำสั่ง บริบท และข้อมูลนำเข้าอยู่รวมกันเป็นย่อหน้าเดียว โอกาสตีความผิดจะสูงขึ้น
+        </aside>
+      </section>
+
+      <section class="slide context-slide" id="slide-8" data-title="เอกสารยาว">
+        <div class="slide-inner two-column">
+          <div class="statement">
+            <p class="kicker">เอกสารยาว</p>
+            <h2>เอกสารยาวให้วางข้อมูลต้นทางก่อน แล้วค่อยถามตอนท้าย</h2>
+            <p>
+              Anthropic แนะนำให้วางเอกสารยาวไว้ด้านบนของ prompt และให้คำถามอยู่ท้ายสุด โดยเฉพาะงานที่มีข้อมูลหลายชุด
+            </p>
+          </div>
+          <div class="stack-diagram" aria-label="Recommended prompt structure">
+            <div>01 เอกสารต้นทาง</div>
+            <div>02 ชื่อไฟล์ + ที่มาข้อมูล</div>
+            <div>03 คำสั่งงาน</div>
+            <div>04 รูปแบบคำตอบ</div>
+            <div>05 คำถามสุดท้าย</div>
+          </div>
+          <p class="source-line span-all">
+            Anthropic ระบุว่า สำหรับงานหลายเอกสาร การวางคำถามไว้ท้าย prompt ช่วยให้ผลลัพธ์ดีขึ้นในชุดทดสอบของเขา
+            <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">อ่านที่มา</a>
+          </p>
+        </div>
+        <aside class="speaker-note">
+          ตัวอย่าง PM: ถ้าจะให้ Claude สรุป vendor proposal เทียบ requirement อย่าเริ่มด้วยถามก่อนแล้วค่อย paste เอกสารยาว ๆ
+          ให้เริ่มจากแยกเอกสารพร้อมชื่อแหล่งข้อมูล แล้วค่อยบอกงานท้ายสุด และขอให้ยกหลักฐานที่เกี่ยวข้องก่อนสรุป
+        </aside>
+      </section>
+
+      <section class="slide examples-slide" id="slide-9" data-title="ให้ตัวอย่าง">
+        <div class="slide-inner">
+          <p class="kicker">ตัวอย่างช่วยคุมรูปแบบ</p>
+          <h2>ให้ Claude ดูงานตัวอย่าง ก่อนให้เขียนประเด็นใหม่</h2>
+          <div class="example-compare example-rich">
+            <article>
+              <h3>ไม่ให้ตัวอย่าง</h3>
+              <p>ช่วยเขียนสรุปสถานะให้ผู้บริหารจากรายการประเด็นนี้</p>
+              <strong>Claude ต้องเดาว่าควรเขียนหัวข้ออะไร ยาวแค่ไหน และต้องมีเรื่องให้ตัดสินใจไหม</strong>
+            </article>
+            <article>
+              <h3>ให้ตัวอย่าง + ประเด็นใหม่</h3>
+              <div class="example-mini-brief">
+                <div>
+                  <span>ตัวอย่างงานที่ดี</span>
+                  <p>สถานะ: เหลือง | ประเด็น: Vendor drawing ยังไม่ปิด | ผลกระทบ: mock-up เสี่ยงเลื่อน 5 วัน | ต้องตัดสินใจ: อนุมัติ overtime review | เจ้าของ: PM + Design</p>
+                </div>
+                <div>
+                  <span>ข้อมูลประเด็นใหม่</span>
+                  <p>Site access ยังไม่ confirm | กระทบงาน MEP 3 วัน | เจ้าของ: Site PM</p>
+                </div>
+              </div>
+              <strong>Claude จะใช้โครงเดิมกับประเด็นใหม่ ไม่ต้องเดาเอง</strong>
+            </article>
+          </div>
+          <div class="example-tags example-flow">
+            <code>1. แปะตัวอย่างงานที่ดี</code>
+            <code>2. บอก “ใช้รูปแบบเดียวกัน”</code>
+            <code>3. ใส่ข้อมูลประเด็นใหม่</code>
+            <code>4. ขอให้เช็กว่าครบประเด็น เจ้าของ และเรื่องตัดสินใจ</code>
+          </div>
+          <p class="source-line">
+            Anthropic แนะนำให้ใช้ตัวอย่างที่เกี่ยวข้อง หลากหลาย และมีโครงสร้าง โดย 3-5 ตัวอย่างมักให้ผลดีที่สุด
+            <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">อ่านที่มา</a>
+          </p>
+        </div>
+        <aside class="speaker-note">
+          อธิบายว่า few-shot คือการให้ Claude เห็นตัวอย่างงานที่ดี ก่อนให้เขาทำงานใหม่ตามรูปแบบเดิม
+          ตัวอย่างควรมีโครงที่ชัด เช่น สถานะ ประเด็น ผลกระทบ เรื่องที่ต้องตัดสินใจ และเจ้าของงาน ถ้ามีหลายสถานะให้ใส่ตัวอย่างเขียว เหลือง แดง เพื่อให้ Claude เห็น pattern ครบขึ้น
+        </aside>
+      </section>
+
+      <section class="slide action-slide" id="slide-10" data-title="สั่งให้ทำชิ้นงาน">
+        <div class="slide-inner">
+          <p class="kicker">จากคำแนะนำสู่ชิ้นงาน</p>
+          <h2>ถ้าอยากได้ชิ้นงาน ต้องสั่งให้ทำชิ้นงาน</h2>
+          <div class="action-split">
+            <article>
+              <span>ขอความเห็น</span>
+              <p>“ช่วยแนะนำวิธีจัด issue log ให้หน่อย”</p>
+              <strong>ได้แนวทางเป็นข้อ ๆ</strong>
+            </article>
+            <article>
+              <span>ให้ทำงาน</span>
+              <p>“อ่าน issue log นี้ แล้วทำตาราง 3 คอลัมน์: ประเด็น / เจ้าของ / สิ่งที่ต้องตัดสินใจ”</p>
+              <strong>ได้ตารางที่เอาไปใช้ต่อได้</strong>
+            </article>
+          </div>
+          <p class="source-line">
+            หลักคิด: บอกให้ชัดว่าต้องการ “คำแนะนำ” หรือ “ชิ้นงานพร้อมตรวจ”
+            <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">อ่านที่มา</a>
+          </p>
+        </div>
+        <aside class="speaker-note">
+          เชื่อมกับ Cowork และ Code ว่าเมื่อเครื่องมือเริ่มทำงานกับไฟล์จริง การสั่งแบบ “แนะนำหน่อย” อาจไม่พอ
+          ถ้ามีไฟล์จริงเกี่ยวข้อง ให้กำหนด folder ให้ชัด และให้ PM ตรวจชิ้นงานก่อนส่งต่อเสมอ
+        </aside>
+      </section>
+
+      <section class="slide matrix-slide" id="slide-11" data-title="เลือกใช้ให้ตรงงาน">
+        <div class="slide-inner">
+          <p class="kicker">ตัวอย่างเลือกใช้ให้ตรงงาน</p>
+          <h2>ใช้ Claude อะไร กับบริบทไหน</h2>
+          <div class="recommendation-table" role="table" aria-label="Claude recommendation matrix">
+            <div role="row" class="table-head">
+              <span role="columnheader">งานของ PM</span>
+              <span role="columnheader">ควรใช้</span>
+              <span role="columnheader">เริ่มที่โมเดล</span>
+              <span role="columnheader">ผลลัพธ์ที่ได้</span>
+            </div>
+            <div role="row">
+              <span>สรุป meeting, issue, RFI</span>
+              <strong>Claude Chat + Projects</strong>
+              <span>Sonnet 5</span>
+              <span>บันทึกสรุปเพื่อใช้ตัดสินใจ</span>
+            </div>
+            <div role="row">
+              <span>เทียบ vendor proposal หลายไฟล์</span>
+              <strong>Claude Cowork</strong>
+              <span>Sonnet 5 / Opus 4.8</span>
+              <span>ตารางเทียบข้อเสนอ</span>
+            </div>
+            <div role="row">
+              <span>รายงานประจำสัปดาห์แบบซ้ำ</span>
+              <strong>Claude Cowork แบบตั้งงานซ้ำ</strong>
+              <span>Sonnet 5 / Haiku 4.5</span>
+              <span>รายงานประจำสัปดาห์</span>
+            </div>
+            <div role="row">
+              <span>ทำ tracker, dashboard, prototype</span>
+              <strong>Claude Code</strong>
+              <span>Sonnet 5 / Opus 4.8</span>
+              <span>ไฟล์หรือหน้าเว็บทดลองใช้</span>
+            </div>
+            <div role="row">
+              <span>งานสำคัญ ซับซ้อน เสี่ยงสูง</span>
+              <strong>Cowork หรือ Code + PM ตรวจซ้ำ</strong>
+              <span>Opus 4.8 / Fable 5</span>
+              <span>ข้อเสนอแนะพร้อมจุดที่ต้องตรวจ</span>
+            </div>
+          </div>
+        </div>
+        <aside class="speaker-note">
+          ตารางนี้คือสิ่งที่ผู้ฟังควรเอากลับไปใช้ได้ทันที
+          ย้ำว่าไม่ใช่ทุกงานต้องใช้ model ที่แพงหรือฉลาดที่สุด งาน routine ใช้ model ที่เร็วและถูกได้ แต่ต้องมีเกณฑ์ตรวจงานชัดเจน
+        </aside>
+      </section>
+
+      <section class="slide chat-slide" id="slide-12" data-title="Claude Chat: เพื่อนคู่คิด">
+        <div class="slide-inner two-column">
+          <div class="statement">
+            <p class="kicker">เพื่อนคู่คิด</p>
+            <h2>ใช้ Chat เมื่ออยากคุย คิด สรุป และแก้งานไปทีละรอบ</h2>
+            <p>
+              ตามเอกสาร Claude: Chat ใช้เขียนและแก้เนื้อหา วิเคราะห์ข้อความ/รูปภาพ ค้นเว็บ สร้างไฟล์ และทำงานกับ Artifacts ได้
+            </p>
+          </div>
+          <div class="playbook-list">
+            <div><span>ถามต่อ</span><p>ถาม สรุป แก้คำ และปรับน้ำเสียงจนได้คำตอบที่ใช้ได้</p></div>
+            <div><span>อ่านไฟล์</span><p>ให้ Claude อ่าน PDF, DOCX, CSV หรือรูป แล้วสรุปประเด็นสำคัญ</p></div>
+            <div><span>สร้างชิ้นงาน</span><p>ทำ memo, checklist, table หรือ mini dashboard ใน Artifacts</p></div>
+            <div><span>จำบริบทโปรเจกต์</span><p>ใช้ Projects เก็บไฟล์และข้อมูลของโครงการเดียวกัน</p></div>
+          </div>
+        </div>
+        <aside class="speaker-note">
+          บอกว่า Chat ยังสำคัญมาก เพราะเป็นพื้นที่ที่ PM คุมทิศทางได้ละเอียดและเร็วที่สุด
+          แนะนำให้ใช้ Projects กับงานที่กลับมาทำซ้ำ ไม่ใช่เปิด chat ใหม่ทุกครั้งแล้วต้องอธิบาย project ใหม่หมด
+        </aside>
+      </section>
+
+      <section class="slide cowork-slide" id="slide-13" data-title="Claude Cowork: ผู้ช่วยจัดงาน">
+        <div class="slide-inner">
+          <p class="kicker">ผู้ช่วยจัดงานหลายขั้น</p>
+          <h2>ใช้ Cowork เมื่อมีหลายไฟล์ และอยากให้ Claude ทำงานจนเสร็จให้ตรวจ</h2>
+          <div class="cowork-flow">
+            <span>เป้าหมาย</span>
+            <span>วางแผน</span>
+            <span>แยกงานย่อย</span>
+            <span>อ่านไฟล์/ใช้แอป</span>
+            <span>ส่งผลลัพธ์</span>
+            <span>คนตรวจ</span>
+          </div>
+          <div class="cowork-usecases">
+            <article>
+              <h3>สรุปรายงานประจำสัปดาห์</h3>
+              <p>รวม minutes, issue log และ schedule เป็นสรุป 1 หน้าให้ทีมตรวจ</p>
+            </article>
+            <article>
+              <h3>เทียบข้อเสนอ vendor</h3>
+              <p>อ่านหลายไฟล์ แล้วทำตารางจุดต่างและคำถามที่ต้องถามเพิ่ม</p>
+            </article>
+            <article>
+              <h3>เตรียมเอกสารประชุม</h3>
+              <p>รวบรวมไฟล์ในโฟลเดอร์ แล้วจัดเป็นชุดข้อมูลสำหรับประชุมผู้บริหาร</p>
+            </article>
+          </div>
+          <p class="source-line">
+            อ้างอิง official: <a href="https://www.anthropic.com/product/claude-cowork">Claude Cowork</a>, <a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork">วิธีเริ่มใช้ Cowork</a>
+          </p>
+        </div>
+        <aside class="speaker-note">
+          Cowork คือคำตอบสำหรับงานที่ PM ไม่ควรต้องคอย copy-paste ทีละ step
+          แต่ต้องย้ำเรื่อง permission: Cowork ทำงานกับไฟล์และแอปจริง จึงต้องเลือก folder ให้ถูก และ review ก่อนส่งหรือเปลี่ยนแปลงอะไรที่กระทบคนอื่น
+        </aside>
+      </section>
+
+      <section class="slide code-slide" id="slide-14" data-title="Claude Code: ทำของทดลองใช้">
+        <div class="slide-inner two-column">
+          <div class="statement">
+            <p class="kicker">ทำ prototype และเครื่องมือเล็ก ๆ</p>
+            <h2>ใช้ Code เมื่ออยากได้ของทดลองใช้ ไม่ใช่แค่ข้อความ</h2>
+            <p>
+              เหมาะกับ tracker, dashboard, prototype หรือ script จากไฟล์ข้อมูลที่มี โดยให้ PM ตรวจผลก่อนส่งต่อทีมเทคนิค
+            </p>
+          </div>
+          <div class="code-terminal" aria-label="Example Claude Code tasks">
+            <p><span>$</span> สร้างหน้า tracker จาก CSV issue log</p>
+            <p><span>$</span> ทำ prototype หน้าอนุมัติ variation order จาก PRD</p>
+            <p><span>$</span> อ่านโฟลเดอร์งาน แล้วอธิบาย flow เป็นภาษาคนทำงาน</p>
+            <p><span>$</span> สร้าง checklist QA จากเงื่อนไขรับงาน</p>
+          </div>
+          <p class="source-line span-all">
+            อ้างอิง official: <a href="https://code.claude.com/docs/en/overview">Claude Code docs</a>, <a href="https://www.anthropic.com/product/claude-code">Claude Code product page</a>
+          </p>
+        </div>
+        <aside class="speaker-note">
+          ลดความกลัวของ PM ว่า Claude Code ไม่ได้แปลว่าต้องเขียน code เองเสมอไป
+          มันคือพื้นที่ที่ prompt กลายเป็นไฟล์จริง เช่น tracker, prototype หรือ script อัตโนมัติ แต่ PM ต้องรู้ขอบเขตและให้ engineering review ก่อนแตะ production
+        </aside>
+      </section>
+
+      <section class="slide closing-slide" id="slide-15" data-title="สรุป">
+        <div class="slide-inner closing-inner">
+          <p class="kicker">สรุปจำง่าย</p>
+          <h2>Prompt ที่ดี = Brief ที่ชัด</h2>
+          <div class="closing-rules">
+            <article>
+              <span>1</span>
+              <p>บอกงาน: ต้องการให้ Claude ทำอะไร</p>
+            </article>
+            <article>
+              <span>2</span>
+              <p>ให้บริบท: แนบข้อมูล ไฟล์ หรือตัวอย่างที่เกี่ยวข้อง</p>
+            </article>
+            <article>
+              <span>3</span>
+              <p>กำหนดผลลัพธ์: ขอเป็นตาราง memo checklist หรือไฟล์ที่ใช้ต่อได้</p>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-note">
+          ปิดด้วยการย้ำว่า prompt ที่ดีคือ brief ที่ชัด ไม่ใช่ prompt ที่ยาวที่สุด
+          ให้ทีมจำ 3 เรื่อง: บอกงาน ให้บริบท และกำหนดผลลัพธ์ที่ต้องการ
+        </aside>
+      </section>
+    </main>
+
+    <div class="deck-controls" aria-label="Slide controls">
+      <button class="nav-button prev-button" type="button">ก่อนหน้า</button>
+      <span class="slide-counter" aria-live="polite">1 / 15</span>
+      <button class="nav-button next-button" type="button">ถัดไป</button>
+    </div>
+
+    <aside class="notes-panel" aria-label="Speaker notes" aria-hidden="true">
+      <div class="notes-panel-header">
+        <span>โน้ตผู้สอน</span>
+        <button class="icon-button close-notes" type="button" aria-label="ปิดโน้ต">×</button>
+      </div>
+      <h2 class="notes-title">Opening</h2>
+      <p class="notes-body"></p>
+    </aside>
+
+    <script src="script.js"></script>
+  </body>
+</html>
