@@ -1,48 +1,63 @@
 # Claude Prompt Engineering for AP PM
 
-Standalone HTML presentation for teaching AP Thailand Project Manager users how to use Claude with practical prompt engineering, model selection, and clear choices between Claude Chat, Claude Cowork, and Claude Code.
+HTML presentation สำหรับสอนทีม Project Manager ของ AP Thailand ให้ใช้ Claude ได้เป็นงานขึ้น โดยเน้น 3 เรื่องหลัก: เลือกประเภท Claude ให้ตรงงาน, เลือก Model ให้เหมาะกับความเสี่ยง/ความเร็ว/ความลึก, และเขียน Prompt ให้ชัดเหมือน brief งานจริง
 
-## Open
+## Live Presentation
 
-Open `index.html` in a browser, or run a static server from this folder:
+เปิด deck เวอร์ชัน public ได้ที่:
+
+https://suphakornp.github.io/claude-prompt-engineering-ap-pm/
+
+## เนื้อหาใน Deck
+
+- การเลือกใช้ Claude Chat, Claude Cowork และ Claude Code ในบริบทงาน PM
+- วิธีเลือก Model สำหรับงานเร็ว งานทั่วไป งานวิเคราะห์ลึก และงานที่ต้องตรวจทานสูง
+- โครงสร้าง Prompt ที่ดี: บอกบทบาท, บริบท, แหล่งข้อมูล, รูปแบบผลลัพธ์ และเกณฑ์คุณภาพ
+- ตัวอย่าง prompt สำหรับ status update, issue/risk, vendor review, memo, checklist และ prototype
+- Speaker notes สำหรับผู้สอน และแหล่งอ้างอิงจาก official Anthropic/Claude documentation
+
+## เปิดใช้งานในเครื่อง
+
+โปรเจกต์นี้เป็น static HTML ไม่มีขั้นตอน build
 
 ```bash
 python3 -m http.server 4173
 ```
 
-Then open `http://localhost:4173`.
+แล้วเปิด:
+
+```text
+http://localhost:4173
+```
+
+หรือเปิดไฟล์ `index.html` ใน browser ได้โดยตรง
 
 ## Controls
 
-- `Arrow Right`, `Page Down`, or `Space`: next slide
-- `Arrow Left` or `Page Up`: previous slide
-- `Home`: first slide
-- `End`: last slide
-- `N`: toggle speaker notes panel
-- `Esc`: close speaker notes panel
-- `แหล่งอ้างอิง`: open official reference notes
-- Round button: fullscreen
+- `Arrow Right`, `Page Down`, หรือ `Space`: ไป slide ถัดไป
+- `Arrow Left` หรือ `Page Up`: ย้อนกลับ
+- `Home`: ไป slide แรก
+- `End`: ไป slide สุดท้าย
+- `N`: เปิด/ปิด speaker notes
+- `Esc`: ปิด speaker notes
+- ปุ่ม `แหล่งอ้างอิง`: เปิด reference notes
+- ปุ่มวงกลมด้านขวาบน: fullscreen
 
-## Files
+## Project Files
 
 - `index.html`: presentation deck
-- `styles.css`: visual system and responsive layout
-- `script.js`: navigation, progress, fullscreen, and notes panel
-- `speaker-notes.md`: full talk track for the presenter
-- `sources.md`: official Anthropic/Claude references and verification notes
-- `assets/`: AP logo/font assets and hero image
-
-## Teaching Scope
-
-The deck covers:
-
-- Prompt as a clear PM brief
-- Claude Chat, Projects, and Artifacts
-- Claude Cowork for multi-step work across files and apps
-- Claude Code for prototypes, dashboards, trackers, and automation
-- Model selection across Fable 5, Opus 4.8, Sonnet 5, Haiku 4.5, and Mythos 5 caveats
-- Long-context prompting, prompt structure, examples, and asking for usable work outputs
+- `styles.css`: visual design, typography, layout และ responsive behavior
+- `script.js`: slide navigation, progress, fullscreen และ notes panel
+- `speaker-notes.md`: talk track สำหรับผู้สอน
+- `sources.md`: official references และ verification notes
+- `assets/`: logo, font และ image assets ที่ใช้ใน deck
 
 ## Source Policy
 
-Model and product claims were checked against official Anthropic, Claude, Claude Help Center, or Claude Platform documentation as of July 2, 2026. See `sources.md`.
+ข้อมูลเรื่อง Claude models, Claude Chat, Claude Cowork, Claude Code และ prompt engineering practices อ้างอิงจาก official Anthropic, Claude, Claude Help Center หรือ Claude Platform documentation เท่าที่ตรวจสอบได้ ณ วันที่ 2 กรกฎาคม 2026 รายละเอียดอยู่ใน `sources.md`
+
+## License
+
+This repository is public for viewing and presentation access, but the training content, AP Thailand branding, fonts, logos, and visual assets are not open licensed.
+
+See `LICENSE` for the full terms.
