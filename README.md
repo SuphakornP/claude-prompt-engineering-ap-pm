@@ -1,6 +1,6 @@
 # Claude Prompt Engineering for AP PM
 
-HTML presentation สำหรับสอนทีม Project Manager ของ AP Thailand ให้ใช้ Claude ได้เป็นงานขึ้น โดยเน้น 3 เรื่องหลัก: เลือกประเภท Claude ให้ตรงงาน, เลือก Model ให้เหมาะกับความเสี่ยง/ความเร็ว/ความลึก, และเขียน Prompt ให้ชัดเหมือน brief งานจริง
+HTML presentation สำหรับสอนทีม Project Manager ของ AP Thailand ให้ใช้ Claude ได้เป็นงานขึ้น โดยเน้น 3 เรื่องหลัก: เขียน Prompt ให้ชัดเหมือน brief งานจริง, เลือกประเภท Claude ให้ตรงงาน, และเลือก Model ให้เหมาะกับความเสี่ยง/ความเร็ว/ความลึก
 
 ## Live Presentation
 
@@ -10,9 +10,9 @@ https://suphakornp.github.io/claude-prompt-engineering-ap-pm/
 
 ## เนื้อหาใน Deck
 
+- โครงสร้าง Prompt ที่ดี: บอกบทบาท, บริบท, แหล่งข้อมูล, รูปแบบผลลัพธ์ และเกณฑ์คุณภาพ
 - การเลือกใช้ Claude Chat, Claude Cowork และ Claude Code ในบริบทงาน PM
 - วิธีเลือก Model สำหรับงานเร็ว งานทั่วไป งานวิเคราะห์ลึก และงานที่ต้องตรวจทานสูง
-- โครงสร้าง Prompt ที่ดี: บอกบทบาท, บริบท, แหล่งข้อมูล, รูปแบบผลลัพธ์ และเกณฑ์คุณภาพ
 - ตัวอย่าง prompt สำหรับ status update, issue/risk, vendor review, memo, checklist และ prototype
 - Speaker notes สำหรับผู้สอน และแหล่งอ้างอิงจาก official Anthropic/Claude documentation
 

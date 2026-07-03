@@ -7,7 +7,7 @@ A late-night project war-room for AP project managers: dark glass, warm working 
 ## Content Plan
 
 1. Hero: reposition prompt engineering as clear PM briefing.
-2. Agenda: preview the 3 core topics: Claude type, model choice, and good prompts.
+2. Agenda: preview the 3 core topics in learning order: good prompts, Claude type, and model choice.
 3. Insight: anchor the session with Piyalitt Ittichaiwong's prompt-as-brief idea.
 4. PM reality: show context overload across project artifacts.
 5. Claude work types: separate Chat, Cowork, and Code by job type.
